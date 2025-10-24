@@ -1,72 +1,26 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 
-export default function CatFriends() {
-  const firstCatRef = useRef(null);
-  const secondCatRef = useRef(null);
-  const thirdCatRef = useRef(null);
+export default function VideoPlayer() {
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  function handleScrollToFirstCat() {
-    firstCatRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
-    });
-  }
-
-  function handleScrollToSecondCat() {
-    secondCatRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
-    });
-  }
-
-  function handleScrollToThirdCat() {
-    thirdCatRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
-    });
+  function handleClick() {
+    const nextIsPlaying = !isPlaying;
+    setIsPlaying(nextIsPlaying);
   }
 
   return (
     <>
-      <nav>
-        <button onClick={handleScrollToFirstCat}>
-          Neo
-        </button>
-        <button onClick={handleScrollToSecondCat}>
-          Millie
-        </button>
-        <button onClick={handleScrollToThirdCat}>
-          Bella
-        </button>
-      </nav>
-      <div>
-        <ul>
-          <li>
-            <img
-              src="https://placecats.com/neo/300/200"
-              alt="Neo"
-              ref={firstCatRef}
-            />
-          </li>
-          <li>
-            <img
-              src="https://placecats.com/millie/200/200"
-              alt="Millie"
-              ref={secondCatRef}
-            />
-          </li>
-          <li>
-            <img
-              src="https://placecats.com/bella/199/200"
-              alt="Bella"
-              ref={thirdCatRef}
-            />
-          </li>
-        </ul>
-      </div>
+      <button onClick={handleClick}>
+        {isPlaying ? 'Pause' : 'Play'}
+      </button>
+      <video width="250">
+        <source
+          src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+          type="video/mp4"
+        />
+      </video>
     </>
-  );
+  )
 }
+
+          
